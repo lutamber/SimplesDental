@@ -117,7 +117,7 @@ public class DefaultProfissionalService implements ProfissionalService {
 
         if(name.isEmpty() || name.isBlank())
             throw new InvalidFieldException(NOME_INVALIDO);
-        if(nascimento == null || nascimento.isBefore(LocalDate.now()))
+        if(nascimento == null || !nascimento.isBefore(LocalDate.now()))
             throw new InvalidFieldException(DATA_NASCIMENTO_INVALIDA);
     }
 }

@@ -1,6 +1,5 @@
 package br.com.lutamber.simplesdental.entity.profissional;
 
-import br.com.lutamber.simplesdental.dto.profissionais.ProfissionalOutputDTO;
 import jakarta.persistence.*;
 import lombok.*;
 

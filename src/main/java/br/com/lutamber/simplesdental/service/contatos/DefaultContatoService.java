@@ -3,28 +3,21 @@ package br.com.lutamber.simplesdental.service.contatos;
 import br.com.lutamber.simplesdental.dto.contatos.ContatoCreateDTO;
 import br.com.lutamber.simplesdental.dto.contatos.ContatoOutputDTO;
 import br.com.lutamber.simplesdental.dto.contatos.ContatoUpdateDTO;
-import br.com.lutamber.simplesdental.dto.profissionais.ProfissionalInputDTO;
-import br.com.lutamber.simplesdental.dto.profissionais.ProfissionalOutputDTO;
 import br.com.lutamber.simplesdental.entity.contato.Contato;
-import br.com.lutamber.simplesdental.entity.profissional.Profissional;
 import br.com.lutamber.simplesdental.exception.InvalidFieldException;
 import br.com.lutamber.simplesdental.exception.ResourceNotFoundException;
 import br.com.lutamber.simplesdental.repository.contatos.ContatosCustomRepository;
 import br.com.lutamber.simplesdental.repository.contatos.ContatosRepository;
-import br.com.lutamber.simplesdental.repository.profissionais.ProfissionaisCustomRepository;
 import br.com.lutamber.simplesdental.repository.profissionais.ProfissionaisRepository;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +36,7 @@ public class DefaultContatoService implements ContatoService {
     private final String[]enabledFields = {"id", "nome", "contato", "created_date"};
 
     @Override
+    @Transactional
     public ContatoOutputDTO create(ContatoCreateDTO contato) {
         this.validateDTO(contato);
 
@@ -58,6 +52,7 @@ public class DefaultContatoService implements ContatoService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ContatoOutputDTO findById(String id) {
         var entity = this.contatoRepository.findById(id).orElseThrow(
             () -> new ResourceNotFoundException(CONTATO_NAO_ENCONTRADO)
@@ -66,6 +61,7 @@ public class DefaultContatoService implements ContatoService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ArrayNode findAll(String query, List<String> fields) {
 
         if(fields == null || fields.isEmpty())
@@ -77,6 +73,7 @@ public class DefaultContatoService implements ContatoService {
     }
 
     @Override
+    @Transactional
     public ContatoOutputDTO update(String id, ContatoUpdateDTO contato) {
         try {
             var reference = this.contatoRepository.getReferenceById(id);
@@ -90,6 +87,7 @@ public class DefaultContatoService implements ContatoService {
     }
 
     @Override
+    @Transactional
     public void deleteById(String id) {
         if(!this.contatoRepository.existsById(id))
             throw new ResourceNotFoundException(CONTATO_NAO_ENCONTRADO);

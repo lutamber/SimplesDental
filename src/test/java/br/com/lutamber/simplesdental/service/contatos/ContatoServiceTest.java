@@ -12,11 +12,8 @@ import br.com.lutamber.simplesdental.repository.contatos.DefaultContatosCustomRe
 import br.com.lutamber.simplesdental.repository.profissionais.ProfissionaisRepository;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.dao.DataIntegrityViolationException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

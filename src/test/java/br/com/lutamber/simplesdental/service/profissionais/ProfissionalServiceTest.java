@@ -10,8 +10,6 @@ import br.com.lutamber.simplesdental.repository.profissionais.ProfissionaisRepos
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -48,7 +46,7 @@ public class ProfissionalServiceTest {
 
         var professionalName = "John Doe";
         var professionalPosition = Cargo.Desenvolvedor;
-        var professionalBornDate = LocalDate.now();
+        var professionalBornDate = LocalDate.now().minusYears(20);
 
         var dto = new ProfissionalInputDTO(
             professionalName,
@@ -69,7 +67,7 @@ public class ProfissionalServiceTest {
     @Test
     public void givenAInvalidPosition_whenCallToCreateProfessional_thenThrowsException() {
         var professionalName = "John Doe";
-        var professionalBornDate = LocalDate.now();
+        var professionalBornDate = LocalDate.now().minusYears(20);
 
         var dto = new ProfissionalInputDTO(
             professionalName,
@@ -87,7 +85,7 @@ public class ProfissionalServiceTest {
 
         var professionalName = " ";
         var professionalPosition = Cargo.Desenvolvedor;
-        var professionalBornDate = LocalDate.now();
+        var professionalBornDate = LocalDate.now().minusYears(20);
 
         var dto = new ProfissionalInputDTO(
             professionalName,
@@ -105,7 +103,7 @@ public class ProfissionalServiceTest {
 
         var professionalName = "John Doe";
         var professionalPosition = Cargo.Desenvolvedor;
-        var professionalBornDate = LocalDate.now().minusDays(1);
+        var professionalBornDate = LocalDate.now().plusDays(1);
 
         var dto = new ProfissionalInputDTO(
             professionalName,
@@ -122,7 +120,7 @@ public class ProfissionalServiceTest {
     public void givenAValidId_whenCallToFindProfessionalById_thenReturnProfessional() {
         var professionalName = "John Doe";
         var professionalPosition = Cargo.Desenvolvedor;
-        var professionalBornDate = LocalDate.now();
+        var professionalBornDate = LocalDate.now().minusYears(20);
 
         var dto = new ProfissionalInputDTO(
             professionalName,
@@ -157,7 +155,7 @@ public class ProfissionalServiceTest {
     public void givenNoQueryStr_whenCallToListProfessional_thenReturnProfessional() {
         var professionalName = "John Doe";
         var professionalPosition = Cargo.Desenvolvedor;
-        var professionalBornDate = LocalDate.now();
+        var professionalBornDate = LocalDate.now().minusYears(20);
 
         var dto = new ProfissionalInputDTO(
             professionalName,
@@ -183,7 +181,7 @@ public class ProfissionalServiceTest {
     public void givenQueryStr_whenCallToListProfessional_thenReturnProfessional() {
         var professionalName = "John Doe";
         var professionalPosition = Cargo.Desenvolvedor;
-        var professionalBornDate = LocalDate.now();
+        var professionalBornDate = LocalDate.now().minusYears(20);
 
         var dto = new ProfissionalInputDTO(
             professionalName,
@@ -209,7 +207,7 @@ public class ProfissionalServiceTest {
     public void givenFieldList_whenCallToListProfessional_thenReturnFieldList() {
         var professionalName = "John Doe";
         var professionalPosition = Cargo.Desenvolvedor;
-        var professionalBornDate = LocalDate.now();
+        var professionalBornDate = LocalDate.now().minusYears(20);
 
         ArrayList<String> fields = new ArrayList<>();
         fields.add("id");
@@ -240,7 +238,7 @@ public class ProfissionalServiceTest {
     public void givenInvalidId_whenCallToUpdateProfessional_thenThrowsException() {
         var professionalName = "John Doe";
         var professionalPosition = Cargo.Desenvolvedor;
-        var professionalBornDate = LocalDate.now();
+        var professionalBornDate = LocalDate.now().minusYears(20);
 
         var professionalUpdateName = "Jane Doe";
 
@@ -268,7 +266,7 @@ public class ProfissionalServiceTest {
     public void givenValidId_whenCallToUpdateProfessional_thenReturnUpdatedProfessional() {
         var professionalName = "John Doe";
         var professionalPosition = Cargo.Desenvolvedor;
-        var professionalBornDate = LocalDate.now();
+        var professionalBornDate = LocalDate.now().minusYears(20);
 
         var professionalUpdateName = "Jane Doe";
 
@@ -301,7 +299,7 @@ public class ProfissionalServiceTest {
     public void givenValidId_whenCallToDeleteProfessional_thenReturnVoid() {
         var professionalName = "John Doe";
         var professionalPosition = Cargo.Desenvolvedor;
-        var professionalBornDate = LocalDate.now();
+        var professionalBornDate = LocalDate.now().minusYears(20);
 
         var insertDto = new ProfissionalInputDTO(
             professionalName,
@@ -320,7 +318,7 @@ public class ProfissionalServiceTest {
     public void givenInvalidId_whenCallToDeleteProfessional_thenThrowsException() {
         var professionalName = "John Doe";
         var professionalPosition = Cargo.Desenvolvedor;
-        var professionalBornDate = LocalDate.now();
+        var professionalBornDate = LocalDate.now().minusYears(20);
 
         var insertDto = new ProfissionalInputDTO(
             professionalName,
